@@ -4,11 +4,15 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -76,11 +80,39 @@ public class Registro extends JFrame{
 
 		
 		JButton btnNewButton_1 = new JButton("Ver Registros");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VerRegistros pantallaR = new VerRegistros();
+				pantallaR.setVisible(true);
+				pantallaR.setLocationRelativeTo(null);
+			}
+		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnNewButton_1.setBounds(110, 123, 247, 71);
 		panel_1.add(btnNewButton_1);
 		
-		JButton btnNewButton_2 = new JButton("Cerrar");
+		JButton btnNewButton_2 = new JButton("Burbujas");
+		btnNewButton_2.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        Burbujas panelBurbujas = new Burbujas();
+		        panelBurbujas.setOpaque(false);
+		        panelBurbujas.setBounds(0, 0, getWidth(), getHeight());
+
+		        getLayeredPane().add(panelBurbujas, JLayeredPane.POPUP_LAYER);
+		        getLayeredPane().revalidate();
+		        getLayeredPane().repaint();
+
+		        // Quitar burbujas luego de 5 segundos
+		        Timer timer = new Timer(10000, t -> {
+		            getLayeredPane().remove(panelBurbujas);
+		            getLayeredPane().repaint();
+		            ((Timer) t.getSource()).stop(); // Detiene el temporizador
+		        });
+		        timer.setRepeats(false);
+		        timer.start();
+		    }
+		});
+
 		btnNewButton_2.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btnNewButton_2.setBounds(110, 220, 247, 71);
 		panel_1.add(btnNewButton_2);
@@ -102,7 +134,9 @@ public class Registro extends JFrame{
 
 		panel.add(lblNewLabel_1);
 
-		
+	
+        
+        
 		
 
 	}

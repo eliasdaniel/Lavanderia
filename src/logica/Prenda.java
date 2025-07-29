@@ -4,7 +4,7 @@ package logica;
 
 public class Prenda {
 	
-	private int num_cliente;
+	private int num_ticket;
 	private String servicio;
 	private int cantidad;
 	private String entrega;
@@ -12,31 +12,21 @@ public class Prenda {
 	private ClienteEjecutivo clE;
 	private ClienteBasico clB;
 	
-	public Prenda(int num_cliente, String servicio, int cantidad, String entrega, String observacion,
-			ClienteEjecutivo clE) {
-		this.num_cliente = num_cliente;
+	public Prenda( String servicio, int cantidad, String entrega, String observacion) {
+		
 		this.servicio = servicio;
 		this.cantidad = cantidad;
 		this.entrega = entrega;
 		this.observacion = observacion;
-		this.clE = clE;
+		
 		
 	}
-	
-	public Prenda(int num_cliente, String servicio, int cantidad, String entrega, String observacion,
-			ClienteBasico clB) {
-		this.num_cliente = num_cliente;
-		this.servicio = servicio;
-		this.cantidad = cantidad;
-		this.entrega = entrega;
-		this.observacion = observacion;
-		this.clB = clB;
+
+	public int getNum_ticket() {
+		return num_ticket;
 	}
-	public int getNum_cliente() {
-		return num_cliente;
-	}
-	public void setNum_cliente(int num_cliente) {
-		this.num_cliente = num_cliente;
+	public void setNum_ticket(int num_cliente) {
+		this.num_ticket = num_cliente;
 	}
 	public String getServicio() {
 		return servicio;

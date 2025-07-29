@@ -2,35 +2,53 @@ package logica;
 
 public abstract class Cliente {
 	
-	private int id_cliente = 1;
-	private String nombre;
-	private String apellido;
-	private String telefono;
-	private String direccion;
+	protected int id_cliente;
+	protected String nombre;
+	protected String apellido;
+	protected String telefono;
+	protected String direccion;
 	
-	public Cliente(int id_cliente, String nombre, 
+	
+	public Cliente(String nombre, 
 			String apellido, 
 			String telefono) {
-		this.id_cliente++;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.telefono = telefono;
 	}
-	public Cliente(int id_cliente, 
-			String nombre, 
+	
+	public Cliente(String nombre, 
 			String apellido, 
-			String telefono, 
+			String telefono,
 			String direccion) {
-		this.id_cliente ++;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.telefono = telefono;
 		this.direccion = direccion;
 	}
+	public Cliente( 
+			int id_cliente,
+			String nombre, 
+			String apellido, 
+			String telefono, 
+			String direccion) {
+		
+		this.id_cliente = id_cliente;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.telefono = telefono;
+		this.direccion = direccion;
+	}
+	
+	
+
 	public int getId_cliente() {
-		return id_cliente;
+	    return id_cliente;
 	}
 
+	public void setId_cliente(int id_cliente) {
+	    this.id_cliente = id_cliente;
+	}
 
 	public String getNombre() {
 		return nombre;

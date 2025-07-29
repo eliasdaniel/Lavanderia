@@ -2,9 +2,16 @@ package logica;
 
 public class ClienteBasico extends Cliente{
 
-	public ClienteBasico(int id_cliente, String nombre, String apellido, String telefono) {
-		super(id_cliente, nombre, apellido, telefono);
-		// TODO Auto-generated constructor stub
+	public ClienteBasico(String nombre, String apellido, String telefono, String direccion) {
+		super(nombre, apellido, telefono);
+		
 	}
+
+	public ClienteBasico(int idCliente, String nombre, String apellido, String telefono, String direccion) {
+		super(idCliente, nombre, apellido, telefono, direccion);
+	}
+
+	
+
 
 }
