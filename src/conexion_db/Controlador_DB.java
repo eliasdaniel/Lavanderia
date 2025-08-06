@@ -162,6 +162,7 @@ public class Controlador_DB {
 
 	        String sql = """
 	            SELECT 
+	                c.id_cliente,
 	                c.nombre,
 	                c.apellido,
 	                c.telefono,
@@ -185,6 +186,7 @@ public class Controlador_DB {
 
 	            while (rs.next()) {
 	                Object[] fila = {
+	                	rs.getInt("id_cliente"),
 	                    rs.getString("nombre"),
 	                    rs.getString("apellido"),
 	                    rs.getString("telefono"),
@@ -229,13 +231,13 @@ public class Controlador_DB {
 	    
 	    public static boolean actualizarRegistro(Cliente cliente, Prenda prenda) {
 	        String sqlCliente = "UPDATE clientes SET nombre = ?, apellido = ?, telefono = ?, direccion = ?, prioridad = ? WHERE id_cliente = ?";
-	        String sqlPrenda = "UPDATE prendas SET tipo_servicio = ?, cantidad = ?, tipo_entrega = ?, observaciones = ? WHERE cliente_id = ?";
+	        String sqlPrenda = "UPDATE prendas SET id_servicio = ?, cantidad = ?, tipo_entrega = ?, observaciones = ?, estado = ? WHERE id_cliente = ?";
 
 	        try (Connection conn = conectar();
 	             PreparedStatement stmtCliente = conn.prepareStatement(sqlCliente);
 	             PreparedStatement stmtPrenda = conn.prepareStatement(sqlPrenda)) {
 
-	            // Datos del cliente
+	            // Cliente
 	            stmtCliente.setString(1, cliente.getNombre());
 	            stmtCliente.setString(2, cliente.getApellido());
 	            stmtCliente.setString(3, cliente.getTelefono());
@@ -243,12 +245,16 @@ public class Controlador_DB {
 	            stmtCliente.setString(5, (cliente instanceof ClienteEjecutivo) ? ((ClienteEjecutivo) cliente).getPrioridad() : null);
 	            stmtCliente.setInt(6, cliente.getId_cliente());
 
-	            // Datos de la prenda
-	            stmtPrenda.setString(1, prenda.getServicio());
+	            // Obtener ID del servicio
+	            int idServicio = obtenerIdServicioPorNombre(prenda.getServicio());
+
+	            // Prenda
+	            stmtPrenda.setInt(1, idServicio);
 	            stmtPrenda.setInt(2, prenda.getCantidad());
 	            stmtPrenda.setString(3, prenda.getEntrega());
 	            stmtPrenda.setString(4, prenda.getObservacion());
-	            stmtPrenda.setInt(5, cliente.getId_cliente());
+	            stmtPrenda.setString(5, prenda.getEstado());         // ← 5to parámetro
+	            stmtPrenda.setInt(6, cliente.getId_cliente());       // ← 6to parámetro
 
 	            int filasCliente = stmtCliente.executeUpdate();
 	            int filasPrenda = stmtPrenda.executeUpdate();

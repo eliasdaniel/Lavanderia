@@ -12,7 +12,9 @@ import logica.Prenda;
 
 public class RegistrarDatos extends JFrame {
 
-    private JTextField txtNombre, txtApellido, txtTelefono, txtDireccion, txtPrioridad;
+    private JTextField txtNombre, txtApellido, txtTelefono, txtDireccion,txtPrioridad;
+    private JLabel lbPrioridad;
+    
 
     public RegistrarDatos() {
         initialize();
@@ -119,14 +121,19 @@ public class RegistrarDatos extends JFrame {
         JLabel lbObservacion = new JLabel("Observacion:");
         lbObservacion.setBounds(10, 145, 91, 14);
         panelPrenda.add(lbObservacion);
-
-        JLabel lbPrioridad = new JLabel("Prioridad");
+        
+        lbPrioridad = new JLabel("Prioridad");
         lbPrioridad.setBounds(370, 11, 81, 22);
+        lbPrioridad.setOpaque(false); // 🔹 Hace el JLabel transparente
         panelPrenda.add(lbPrioridad);
 
         txtPrioridad = new JTextField();
         txtPrioridad.setBounds(380, 35, 60, 20);
+        txtPrioridad.setOpaque(false); // 🔹 Hace el JTextField transparente
+        txtPrioridad.setBackground(new Color(0, 0, 0, 0)); // 🔹 Fondo completamente transparente
+        txtPrioridad.setBorder(null);
         panelPrenda.add(txtPrioridad);
+
 
         JRadioButton rdbtnEjecutivo = new JRadioButton("Ejecutivo");
         rdbtnEjecutivo.setBounds(121, 77, 111, 23);
@@ -139,12 +146,31 @@ public class RegistrarDatos extends JFrame {
         ButtonGroup grupo = new ButtonGroup();
         grupo.add(rdbtnEjecutivo);
         grupo.add(rdbtnBasico);
+        
+        rdbtnEjecutivo.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                txtPrioridad.setText("Alta");
+                txtPrioridad.setEditable(false); // Opcional
+            }
+        });
+
+        rdbtnBasico.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                txtPrioridad.setText("");
+                txtPrioridad.setEditable(false); // Mantener desactivado también para básico
+            }
+        });
+
 
         JButton btnLimpiar = new JButton("Limpiar");
         btnLimpiar.setBounds(53, 545, 170, 34);
         btnLimpiar.addActionListener(e -> {
-            txtNombre.setText(""); txtApellido.setText(""); txtTelefono.setText(""); txtDireccion.setText(""); txtPrioridad.setText("");
+            txtNombre.setText(""); txtApellido.setText(""); txtTelefono.setText(""); txtDireccion.setText("");
             txtObservacion.setText(""); spnCantidad.setValue(0); cmbEntrega.setSelectedIndex(0); cmbServicio.setSelectedIndex(0);
+ 
+            
+
+ 
         });
         panel.add(btnLimpiar);
 
@@ -158,7 +184,7 @@ public class RegistrarDatos extends JFrame {
                 String apellido = txtApellido.getText();
                 String telefono = txtTelefono.getText();
                 String direccion = txtDireccion.getText();
-                String prioridad = txtPrioridad.getText();
+               String prioridad = txtPrioridad.getText();
 
                 if (nombre.isEmpty() || apellido.isEmpty() || telefono.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Por favor completa todos los campos obligatorios.");

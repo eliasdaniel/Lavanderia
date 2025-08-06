@@ -11,6 +11,7 @@ public class Prenda {
 	private String observacion;
 	private ClienteEjecutivo clE;
 	private ClienteBasico clB;
+	private String estado;
 	
 	public Prenda( String servicio, int cantidad, String entrega, String observacion) {
 		
@@ -19,6 +20,16 @@ public class Prenda {
 		this.entrega = entrega;
 		this.observacion = observacion;
 		
+		
+	}
+	
+public Prenda( String servicio, int cantidad, String entrega, String observacion, String estado) {
+		
+		this.servicio = servicio;
+		this.cantidad = cantidad;
+		this.entrega = entrega;
+		this.observacion = observacion;
+		this.estado = estado;
 		
 	}
 
@@ -63,6 +74,12 @@ public class Prenda {
 	}
 	public void setclB(ClienteBasico clB) {
 		this.clB = clB;
+	}
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 	

@@ -92,6 +92,8 @@ public class Registro extends JFrame{
 		panel_1.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Burbujas");
+		btnNewButton_2.setBounds(0, 398, 66, 21);
+		panel_1.add(btnNewButton_2);
 		btnNewButton_2.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		        Burbujas panelBurbujas = new Burbujas();
@@ -112,10 +114,8 @@ public class Registro extends JFrame{
 		        timer.start();
 		    }
 		});
-
-		btnNewButton_2.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnNewButton_2.setBounds(110, 220, 247, 71);
-		panel_1.add(btnNewButton_2);
+		
+				btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 5));
 		
 		
 		
